@@ -3,6 +3,6 @@ class DefaultMutableMap<K, V>(
     private val defaultValue: () -> V
 ): MutableMap<K, V> by map {
     override fun get(key: K): V {
-        return map.getOrPut(key, defaultValue)
+        return map.computeIfAbsent(key) { defaultValue() }
     }
 }
